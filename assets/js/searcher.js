@@ -1,6 +1,8 @@
 
 let datosJson = "https://raw.githubusercontent.com/Bootcamp-Espol/Datos/main/products.json";
+let datosXML="https://raw.githubusercontent.com/Bootcamp-Espol/Datos/main/products.xml";
 
+//Cargamos los datos desde el json
 let loadProducts = (datosJson) => {
   fetch(datosJson)
     .then(response => response.json())
@@ -44,6 +46,21 @@ let loadProducts = (datosJson) => {
     });
 };
 
+let loadXML= (datosXML) => {
+  fetch(datosXML)
+  .then(response => response.text()) //La respuesta se convierte a texto
+  .then(
+    result=>{
+      const parser = new DOMParser()
+      let xml =parser.parseFromString(result,'text/xml')
+      console.log(xml)
+    }
+  )
+  .catch(error => console.error('Error fetching XML:', error));//Verificacion de error
+}
+
+
 // Llama a la función para cargar los productos
-loadProducts(datosJson);
+loadProducts(datosJson); //cargamos desde el Json
+loadXML(datosXML);
 
