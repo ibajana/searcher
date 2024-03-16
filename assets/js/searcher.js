@@ -2,6 +2,8 @@
 let datosJson = "https://raw.githubusercontent.com/Bootcamp-Espol/Datos/main/products.json";
 let datosXML = "https://raw.githubusercontent.com/Bootcamp-Espol/Datos/main/products.xml";
 
+
+
 //Cargamos los datos desde el json
 let loadProducts = (datosJson) => {
   fetch(datosJson)
@@ -92,21 +94,45 @@ let loadXML = (datosXML) => {
         }
           
         };
+      })      
+      .catch(error => {
+        console.error("Error fetching or parsing JSON:", error);
+      });
+  };
+
+loadProducts(datosJson)
+loadXML(datosXML)
+document.addEventListener("DOMContentLoaded",(e)=>{
+  let boton = document.getElementById("filter")
+  let productos=document.getElementById("productos")
+  
+//Se usa el boton para filtrar lo que ya esta escrito
+  boton.addEventListener("click",()=>{
+    let searcher= document.getElementById("text").value
+    productos.querySelectorAll(".card-blog").forEach(producto=>{
+      producto.textContent.toLowerCase().includes(searcher)
+      ? producto.classList.remove("d-none")// se usa d-none propio de bootstrap para ocultar los elementos
+      : producto.classList.add("d-none") 
+    })
+  })
+
+// Se usa el keyup para filtrar a medida que se escribe
+  /*searcher.addEventListener("keyup",(e)=>{
+    
+    if(e.target.matches("#text")){
+      document.querySelectorAll(".card-blog").forEach(producto=>{
+        producto.textContent.toLowerCase().includes(e.target.value)
+        ? producto.classList.remove("d-none")
+        : producto.classList.add("d-none")      
       })
-          
-
-          
-          
-          
+    }
       
-          .catch(error => {
-            console.error('Error fetching XML:', error)});//Verificacion de error
-        };
-        
-      
+  })*/
+});
 
+  
 
 // Llama a la función para cargar los productos
-loadProducts(datosJson); //cargamos desde el Json
-  loadXML(datosXML);
+//loadProducts(datosJson); //cargamos desde el Json
+//loadXML(datosXML);
 
