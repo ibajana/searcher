@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded",(e)=>{
 //Se usa el boton para filtrar lo que ya esta escrito
   boton.addEventListener("click",()=>{
     let searcher= document.getElementById("text").value
-    productos.querySelectorAll(".card-blog").forEach(producto=>{
+    productos.querySelectorAll(".col-xl-3").forEach(producto=>{
       producto.textContent.toLowerCase().includes(searcher)
       ? producto.classList.remove("d-none")// se usa d-none propio de bootstrap para ocultar los elementos
       : producto.classList.add("d-none") 
